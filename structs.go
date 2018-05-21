@@ -11,10 +11,15 @@ type Cost struct {
 	Percent int64
 }
 
+//CurrencyPair is a pair of currencies
+type CurrencyPair struct {
+	Primary   string
+	Secondary string
+}
+
 //Tick is the current status of the market
 type Tick struct {
-	PrimaryCurrency         string
-	SecondaryCurrency       string
+	Currency                CurrencyPair
 	CurrentHighestBidPrice  int64
 	CurrentLowestOfferPrice int64
 	LastPrice               int64
@@ -22,10 +27,9 @@ type Tick struct {
 
 //OrderBook gets the current open orders
 type OrderBook struct {
-	PrimaryCurrency   string
-	SecondaryCurrency string
-	BuyOrders         Orders
-	SellOrders        Orders
+	Currency   CurrencyPair
+	BuyOrders  Orders
+	SellOrders Orders
 }
 
 //Orders encapsulates multiple instances of an Order
@@ -65,10 +69,9 @@ type Order struct {
 
 //RecentTrades returns the most recent trades between the two specified currencies
 type RecentTrades struct {
-	PrimaryCurrency   string
-	SecondaryCurrency string
-	Timestamp         time.Time //ms
-	Trades            Trades
+	Currency  CurrencyPair
+	Timestamp time.Time //ms
+	Trades    Trades
 }
 
 //Trades is a collection of singular instances of Trade
@@ -85,13 +88,12 @@ type OrdersDetails []OrderDetails
 
 //OrderDetails encapsulates the details of an order
 type OrderDetails struct {
-	PrimaryCurrency   string
-	SecondaryCurrency string
-	OrderID           int64
-	Created           time.Time
-	VolumeOrdered     int64
-	VolumeFilled      int64
-	Price             int64
+	Currency      CurrencyPair
+	OrderID       int64
+	Created       time.Time
+	VolumeOrdered int64
+	VolumeFilled  int64
+	Price         int64
 	//OrderSide Bid/Ask
 	OrderSide string
 	//OrderType Limit/Market

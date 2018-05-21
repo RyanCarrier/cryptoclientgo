@@ -1,6 +1,8 @@
 package cryptoclientgo
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestGetBest(t *testing.T) {
 	o := getOrders()
@@ -15,6 +17,7 @@ func TestGetBest(t *testing.T) {
 }
 
 func TestGetSell(t *testing.T) {
+
 	o := getOrders()
 	amt, err := o.getBestSell(5 * Multiplier)
 	if err != nil {

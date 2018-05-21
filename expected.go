@@ -9,17 +9,17 @@ import (
 var ErrMath = errors.New("MATH ERROR, most likely BigInt too large for int64")
 
 //ExpectedMarketValueBuy gets the expected value cost from PrimaryCurrency to achieve the specified amount of SecondaryCurrency
-func (c CryptoClient) ExpectedMarketValueBuy(PrimaryCurrency, SecondaryCurrency string, amountOfSecondary int64) (int64, error) {
-	return c.expectedMarketValue(PrimaryCurrency, SecondaryCurrency, amountOfSecondary, true)
+func (c CryptoClient) ExpectedMarketValueBuy(Currency CurrencyPair, amountOfSecondary int64) (int64, error) {
+	return c.expectedMarketValue(Currency, amountOfSecondary, true)
 }
 
 //ExpectedMarketValueSell gets the expected value recieved of PrimaryCurrency by selling the specified amount of SecondaryCurrency
-func (c CryptoClient) ExpectedMarketValueSell(PrimaryCurrency, SecondaryCurrency string, amountOfSecondary int64) (int64, error) {
-	return c.expectedMarketValue(PrimaryCurrency, SecondaryCurrency, amountOfSecondary, false)
+func (c CryptoClient) ExpectedMarketValueSell(Currency CurrencyPair, amountOfSecondary int64) (int64, error) {
+	return c.expectedMarketValue(Currency, amountOfSecondary, false)
 }
 
-func (c CryptoClient) expectedMarketValue(PrimaryCurrency, SecondaryCurrency string, amt int64, buy bool) (int64, error) {
-	order, err := c.GetOrderBook(PrimaryCurrency, SecondaryCurrency)
+func (c CryptoClient) expectedMarketValue(Currency CurrencyPair, amt int64, buy bool) (int64, error) {
+	order, err := c.GetOrderBook(Currency)
 	if err != nil {
 		return 0, errors.New("Failed to get open orders;" + err.Error())
 	}
