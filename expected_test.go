@@ -31,10 +31,10 @@ func TestGetSell(t *testing.T) {
 
 func getOrders() Orders {
 	o := Orders{
-		{1, 1},
-		{1, 2},
-		{5, 4},
-		{2, 2},
+		{Price: 1, Volume: 1},
+		{Price: 1, Volume: 2},
+		{Price: 5, Volume: 4},
+		{Price: 2, Volume: 2},
 	}
 
 	for i := range o {
